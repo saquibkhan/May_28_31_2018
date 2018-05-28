@@ -22,6 +22,7 @@ public class SessionPlannerImpl implements SessionPlanner{
 		//Lambda Expressions
 		topics.forEach((topic,duration) -> {
 			if(duration.toString().contains("60")) {
+				System.out.println(topic);
 				_60MinTopics.add(topic.toString());
 			}
 			else if(duration.toString().contains("45")) {
