@@ -6,6 +6,7 @@
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<!-- <property name="location" value="classpath:intuit.properties"></property> -->
 		<property name="locations">
+		
 			<list>
 				<value>classpath:bangalore.properties</value>
 				<value>classpath:intuit.properties</value>
@@ -25,6 +26,7 @@
 		<property name="name" value="Sam"></property>
 		<property name="car" ref="bmw"></property>
 		<property name="hobbies">
+			
 			<list>
 				<value>TV</value>
 				<value>EAT</value>
