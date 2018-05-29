@@ -2,8 +2,11 @@ package com.intuit.lab01;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 @Service
 public class AccountService
@@ -12,6 +15,28 @@ public class AccountService
 	private AccountDao accountDao;
 	@Autowired
 	private StatementDao statementDao;
+	@Autowired
+	private TransactionTemplate transactionTemplate;
+	
+	public void withdraw2(int accountNumber,String type, int amount)throws Exception
+	{
+		int i = 2;
+		i++;
+		transactionTemplate.execute(new TransactionCallback<Boolean>() {
+			public Boolean doInTransaction(TransactionStatus transactionStatus) {
+				try {
+					accountDao.withdraw(accountNumber, amount);
+					statementDao.addStatement(accountNumber, type, amount);
+					return true;
+				}
+				catch(Exception ex) {
+					transactionStatus.setRollbackOnly();
+					return false;
+				}
+			}
+		});
+		
+	}
 	
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void deposit(int accountNumber,String type, int amount) {
