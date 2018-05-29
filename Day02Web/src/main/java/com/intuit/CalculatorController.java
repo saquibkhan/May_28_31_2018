@@ -14,7 +14,8 @@ public class CalculatorController {
 	
 	@Autowired
 	private Calculator calculator;
-
+	
+	
 	@GetMapping("/square/{number}")
 	@ResponseBody
 	public int square(@PathVariable int number) {
