@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class GameController {
 
-	@GetMapping("/game")
+	@GetMapping("/oldgame")
 	public String index(HttpSession session) {
 		if(session.getAttribute("game") == null)
 			session.setAttribute("game", new GuessingGame());
 		return "lab01/index";
 	}
 	
-	@PostMapping("/play")
+	@PostMapping("/oldplay")
 	public String playGame(@RequestParam int guess,HttpSession session,Model model) {
 		GuessingGame game = (GuessingGame)session.getAttribute("game");
 		game.play(guess);
