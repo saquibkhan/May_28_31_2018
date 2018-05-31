@@ -1,8 +1,11 @@
 package com.intuit;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +22,11 @@ public class Person {
 	
 	@Column
 	private int age;
+	
+	@OneToMany(mappedBy="person_id")
+	private List<Car> cars;
+	
+	
 	
 	public int getId() {
 		return id;
